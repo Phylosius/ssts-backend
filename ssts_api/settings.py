@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,11 +77,11 @@ WSGI_APPLICATION = 'ssts_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ssts_db',  # Le nom de ta base de données
-        'USER': 'ssts_db_user',  # Le nom de ton utilisateur PostgreSQL
-        'PASSWORD': 'ssts manager password',  # Le mot de passe que tu as défini
-        'HOST': 'localhost',  # Si PostgreSQL est en local, sinon l'adresse IP du serveur
-        'PORT': '5432',  # Port PostgreSQL par défaut
+        'NAME': env('SSTS_DB'),  # Le nom de ta base de données
+        'USER': env('SSTS_DB_USERNAME'),  # Le nom de ton utilisateur PostgreSQL
+        'PASSWORD': env("SSTS_DB_PASSWORD"),  # Le mot de passe que tu as défini
+        'HOST': env('SSTS_DB_HOST', default='localhost'),  # Si PostgreSQL est en local, sinon l'adresse IP du serveur
+        'PORT': env('SSTS_DB_PORT', default='5432'),  # Port PostgreSQL par défaut
     }
 }
 
