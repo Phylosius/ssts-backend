@@ -1,0 +1,61 @@
+get:
+  tags:
+    - Account
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the Account to check
+      schema:
+        type: string
+  responses:
+    '200':
+      description: The asked Account
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/user.yaml'
+    '404':
+      description: Account not found
+
+patch:
+  tags:
+    - Account
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the Account to update
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/user.yaml'
+  responses:
+    '200':
+      description: Account updated
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/user.yaml'
+
+delete:
+  tags:
+    - Account
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the Account to delete
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Account deleted
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/user.yaml'

@@ -1,0 +1,26 @@
+get:
+  tags:
+    - Event
+  responses:
+    '200':
+      description: List of all Event
+      content:
+        application/json:
+          schema:
+            type:
+            items:
+              $ref: '../schemas/event.yaml'
+
+
+post:
+  tags:
+    - Event
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/event.yaml'
+  responses:
+    '200':
+      description: Event created

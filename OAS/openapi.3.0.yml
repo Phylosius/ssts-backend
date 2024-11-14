@@ -1,0 +1,48 @@
+openapi: '3.0.3'
+info:
+  title: SSTS API
+  version: '0.1.0'
+servers:
+  - url: https://api.ssts.mg/0.1.0
+  - url: https://api.ssts.mg/latest
+paths:
+
+  /:
+    get:
+      tags:
+        - Root
+      responses:
+        '200':
+          description: Welcome page
+          content:
+            text/html:
+              example: 'welcome to the SSTS API.'
+                
+              
+                
+  /test:
+    get:
+      tags:
+        - Test
+      responses:
+        '200':
+          description: OK
+
+  /accounts:
+    $ref: './paths/accounts.yaml'
+
+  /accounts/{id}:
+    $ref: './paths/accounts-id.yaml'
+
+  /events:
+    $ref: './paths/event.yaml'
+
+  /events/{id}:
+    $ref: './paths/event-id.yaml'
+
+components:
+  schemas:
+    User:
+      $ref: './schemas/user.yaml'
+    Event:
+      $ref: './schemas/event.yaml'          

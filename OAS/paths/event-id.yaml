@@ -1,0 +1,61 @@
+get:
+  tags:
+    - Event
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the Event to check
+      schema:
+        type: string
+  responses:
+    '200':
+      description: The asked Event
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/event.yaml'
+    '404':
+      description: Event not found
+
+patch:
+  tags:
+    - Event
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the Event to update
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/event.yaml'
+  responses:
+    '200':
+      description: Event updated
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/event.yaml'
+
+delete:
+  tags:
+    - Event
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the Event to delete
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Event deleted
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/event.yaml'

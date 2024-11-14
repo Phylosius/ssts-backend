@@ -1,0 +1,20 @@
+type: object
+properties:
+  id:
+    type: string
+    example: "05a7ae1f-f629-4939-af65-c1dfe1a12040"
+  username:
+    type: string
+    example: John_does_stuff
+  first_name:
+    type: string
+    example: "John"
+  last_name:
+    type: string
+    example: "Doe"
+  email:
+    type: string
+    example: johndoe@example.com
+  rule:
+    type: string
+    example: "admin"

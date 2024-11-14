@@ -1,0 +1,27 @@
+get:
+  tags:
+    - Account
+  responses:
+    '200':
+      description: List of all accounts  
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/user.yaml'
+
+post:
+  tags:
+    - Account
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/user.yaml'
+  responses:
+    '200':
+      description: Account created
+
+

@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+  name:
+    type: string
+    example: "Java , an Object Oriented Language"
+  description:
+    type: string
+    example: "Lecture about Java"
+  date:
+    type: string
+    format: date
