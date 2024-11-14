@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'ssts_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('SSTS_DB'),  # Le nom de ta base de données
+        'NAME': env('SSTS_DB_NAME'),  # Le nom de ta base de données
         'USER': env('SSTS_DB_USERNAME'),  # Le nom de ton utilisateur PostgreSQL
         'PASSWORD': env("SSTS_DB_PASSWORD"),  # Le mot de passe que tu as défini
         'HOST': env('SSTS_DB_HOST', default='localhost'),  # Si PostgreSQL est en local, sinon l'adresse IP du serveur
@@ -124,3 +124,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.User'
