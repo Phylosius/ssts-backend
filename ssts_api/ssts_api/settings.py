@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'dj_rest_auth',
     'accounts',
+    'faces.apps.FacesConfig'
 ]
 
 MIDDLEWARE = [
