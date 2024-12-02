@@ -5,6 +5,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import UUIDField
 
+from faces.services import get_encodings_from_uploaded_file
+
 
 class Face(models.Model):
 
@@ -20,5 +22,14 @@ class Face(models.Model):
     recording_date = models.DateTimeField(auto_now_add=True)
     reference_image = models.ImageField(upload_to='faces/reference_images/', null=True, blank=True)
 
+    @classmethod
+    def create_face(cls, user, reference_image):
+        face_encodings = get_encodings_from_uploaded_file(reference_image)
+
+        face = cls(user=user, reference_image=reference_image, encoding=face_encodings)
+        face.save()
+
+        return face
+
     def __str__(self):
-        return f"Face of {self.account.username}"
+        return f"Face of {self.user.username}"

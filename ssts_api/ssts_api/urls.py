@@ -10,6 +10,7 @@ router.registry.extend(account_router.registry)
 router.registry.extend(faces_router.registry)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('faces/', include('faces.urls')),
     path('models/', include(router.urls)),
     path('auth/', include('dj_rest_auth.urls')),
 ]
