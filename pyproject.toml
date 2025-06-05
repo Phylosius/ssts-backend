@@ -1,0 +1,7 @@
+[project]
+name = "ssts-backend"
+version = "0.1.0"
+description = "A face recognition based attendance api."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []

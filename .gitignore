@@ -1,0 +1,6 @@
+
+**/*.env
+**/.venv/
+
+# uv
+uv.lock
