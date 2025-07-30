@@ -1,0 +1,8 @@
+
+class Account:
+
+    def __init__(self, id: str, username: str, email: str, password: str):
+        self.id = id
+        self.username = username
+        self.email = email
+        self.password = password
