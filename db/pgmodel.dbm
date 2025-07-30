@@ -5,7 +5,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 -->
 <dbmodel pgmodeler-ver="1.2.0" use-changelog="false" max-obj-count="4"
 	 gen-disabled-objs-code="false" show-sys-schemas-rects="true"
-	 last-position="123,100" last-zoom="1"
+	 last-position="32,91" last-zoom="1"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -41,14 +41,47 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="password" not-null="true">
 		<type name="varchar" length="0"/>
 	</column>
-<constraint name="account_uk" type="uq-constr" table="public.account">
-	<columns names="username" ref-type="src-columns"/>
-</constraint>
-
-<constraint name="account_pk" type="pk-constr" table="public.account">
-	<columns names="id" ref-type="src-columns"/>
-</constraint>
-
+	<constraint name="account_uk" type="uq-constr" table="public.account">
+		<columns names="username" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="account_pk" type="pk-constr" table="public.account">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
 </table>
+
+<table name="face_id" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="ssts_app"/>
+	<position x="780" y="220"/>
+	<column name="id" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="account_id" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="added_at" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_at" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="face_encodings" not-null="true">
+		<type name="float8" length="0" dimension="1"/>
+	</column>
+	<constraint name="face_id_pk" type="pk-constr" table="public.face_id">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="face_account_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.account" table="public.face_id">
+	<columns names="account_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_face_id_account" type="relfk" layers="0"
+	 src-table="public.face_id"
+	 dst-table="public.account" reference-fk="face_account_fk"
+	 src-required="false" dst-required="true"/>
 
 </dbmodel>
