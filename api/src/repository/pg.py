@@ -2,11 +2,11 @@ from psycopg2 import connect
 from ..config import VARIABLES
 
 connection = connect(
-    host=VARIABLES['PG_HOST'],
-    port=VARIABLES['PG_PORT'],
-    database=VARIABLES['PG_NAME'],
-    user=VARIABLES['PG_USER'],
-    password=VARIABLES['PG_PASSWORD']
+    host=VARIABLES.DB_HOST,
+    port=VARIABLES.DB_PORT,
+    database=VARIABLES.DB_NAME,
+    user=VARIABLES.DB_USER,
+    password=VARIABLES.DB_PASSWORD
 )
 
 def transactional(fn):

@@ -8,10 +8,11 @@ config = dotenv_values((project_root_path / ".env").resolve())
 if len(config) == 0:
     raise Exception(".env file not found.")
 
-VARIABLES = {
-    'PG_HOST': config['PG_HOST'],
-    'PG_PORT': int(config['PG_PORT']),
-    'PG_NAME': config['PG_NAME'],
-    'PG_USER': config['PG_USER'],
-    'PG_PASSWORD': config['PG_PASSWORD']
-}
+class Variables:
+    DB_HOST = config['DB_HOST']
+    DB_PORT = int(config['DB_PORT'])
+    DB_NAME = config['DB_NAME']
+    DB_USER = config['DB_USER']
+    DB_PASSWORD = config['DB_PASSWORD']
+
+VARIABLES =Variables()
