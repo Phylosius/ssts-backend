@@ -8,3 +8,6 @@ class FaceId:
         self.created_at = created_at
         self.updated_at = updated_at
         self.face_encodings = face_encodings
+
+    def __str__(self):
+        return f'FaceId(id={self.id}, created_at={self.created_at}, updated_at={self.updated_at}, face_encodings={self.face_encodings})'
