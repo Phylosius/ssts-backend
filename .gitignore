@@ -5,3 +5,6 @@
 
 # uv
 uv.lock
+
+# python
+**/__pycache__/
