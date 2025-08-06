@@ -1,6 +1,3 @@
-from datetime import datetime
-import numpy as np
-
 from .pg import transactional
 from ..model.face_id import FaceId
 from ..mapper.array_mapper import ndarray_to_pgarray
