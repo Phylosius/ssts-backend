@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: "API"
+  version: "1.0.0-alpha"
+tags:
+  - name: SSTS API
+    description: Identification API by facial recognition
+paths:
+  /:
+    get:
+      operationId: index
+      description: API Greeting Point
+      summary: Get a greeting message
+      tags: [ 'Greeting', 'Index' ]
+      responses:
+        '200':
+          description: The greeting message
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "The server is running ╰(*°▽°*)╯"

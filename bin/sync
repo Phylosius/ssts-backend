@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
+
+echo "Syncing project dependencies with uv sync..."
+
+cd "$PROJECT_DIR" && uv sync
+
+exit 0

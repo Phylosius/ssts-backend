@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
+
+if [ ! -d "$PROJECT_DIR/.venv" ]; then
+  "$PROJECT_DIR/bin/sync"
+fi
+
+echo "Starting the wsgi server..."
+
+cd "$PROJECT_DIR" && uv run -m api.src.wsgi
