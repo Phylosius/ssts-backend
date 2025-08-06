@@ -2,10 +2,13 @@ from flask import Flask
 
 from api.src.config.variables import VARIABLES
 from api.src.controller.index_controller import index_bp
+from api.src.controller.account_controller import account_bp
 from api.src.controller.error_handler import notfound_error_handler
 
 app = Flask(__name__)
+
 app.register_blueprint(index_bp)
+app.register_blueprint(account_bp)
 
 app.register_error_handler(404, notfound_error_handler)
 
