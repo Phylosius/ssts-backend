@@ -30,6 +30,14 @@ def get_by_id(cur, account_id: str):
     return Account(*data)
 
 @transactional
+def get_all(cur):
+    cur.execute(
+        "SELECT id, username, email, password FROM account;"
+    )
+    data = cur.fetchall()
+    return [Account(*list(row)) for row in data]
+
+@transactional
 def update(cur, account_id: str, account: Account):
     cur.execute(
         "UPDATE account SET username = %s, email = %s, password = %s WHERE id = %s"
