@@ -1,8 +1,7 @@
-from .face_id import FaceId
 
 class Account:
 
-    def __init__(self, id: str, username: str, email: str, password: str, face_id: FaceId):
+    def __init__(self, id: str, username: str, email: str, password: str):
         self.id = id
         self.username = username
         self.email = email

@@ -27,7 +27,6 @@ def get_by_id(cur, account_id: str):
     if data is None:
         return None
     data = list(data)
-    data.append(None)
     return Account(*data)
 
 @transactional
@@ -38,5 +37,4 @@ def update(cur, account_id: str, account: Account):
         (account.username, account.email, account.password, account_id),
     )
     data = list(cur.fetchone())
-    data.append(None)
     return Account(*data)

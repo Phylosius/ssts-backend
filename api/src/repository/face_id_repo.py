@@ -2,12 +2,16 @@ from .pg import transactional
 from ..model.face_id import FaceId
 from ..mapper.array_mapper import ndarray_to_pgarray
 
+from .account_repo import get_by_id as get_account_by_id, save as save_account
+
 
 @transactional
-def save(cur, face_id: FaceId, account_id: str):
+def save(cur, face_id: FaceId):
+    if get_account_by_id(cur, face_id.account.id) is None:
+        save_account(cur, face_id.account)
     cur.execute(
         "INSERT INTO face_id (id, account_id, added_at, updated_at, face_encodings) VALUES (%s, %s, %s, %s, %s);",
-        (face_id.id, account_id, face_id.created_at, face_id.updated_at, ndarray_to_pgarray(face_id.face_encodings)),
+        (face_id.id, face_id.account.id, face_id.created_at, face_id.updated_at, ndarray_to_pgarray(face_id.face_encodings)),
     )
     return True
 
