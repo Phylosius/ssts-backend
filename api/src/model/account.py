@@ -7,7 +7,6 @@ class Account:
         self.username = username
         self.email = email
         self.password = password
-        self.face_id = face_id
 
     def __str__(self):
         return f'Account(id={self.id}, username={self.username}, email={self.email}, password={self.password}, face_id={self.face_id})'
