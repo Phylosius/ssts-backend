@@ -135,8 +135,72 @@ paths:
                       type: string
                       format: uuid
 
+  /face/describe:
+    post:
+      operationId: recognize_face
+      description: Returns recognition information from face(s) image
+      summary: Recognize face(s) from an image
+      tags: [ 'Face' ]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: The list of recognized faces encodings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FaceInfo'
+
 components:
   schemas:
+    FaceInfo:
+      allOf:
+        - $ref: '#/components/schemas/FaceRecognitionEncodings'
+      properties:
+        boundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        imageSourceUrl:
+          type: string
+          format: uri
+          example: "https://example.com/image.jpg"
+
+    BoundingBox:
+      allOf:
+        - $ref: '#/components/schemas/LTBRRectangle'
+
+    LTBRRectangle:
+      type: object
+      properties:
+        left:
+          type: integer
+        top:
+          type: integer
+        bottom:
+          type: integer
+        right:
+          type: integer
+
+    FaceRecognitionEncodings:
+      type: object
+      properties:
+        encodings:
+            type: array
+            items:
+              type: number
+              format: float
+              minItems: 128
+              maxItems: 128
+
     Account:
       allOf:
         - $ref: '#/components/schemas/AccountBase'
