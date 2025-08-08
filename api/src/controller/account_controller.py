@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-from psycopg2.errors import UniqueViolation
 
 from ..service.account_service import (
     get_all as get_all_accounts,
