@@ -11,7 +11,7 @@ paths:
       operationId: index
       description: API Greeting Point
       summary: Get a greeting message
-      tags: [ 'Greeting', 'Index' ]
+      tags: ['Index' ]
       responses:
         '200':
           description: The greeting message
@@ -20,3 +20,166 @@ paths:
               schema:
                 type: string
                 example: "The server is running ╰(*°▽°*)╯"
+
+  /accounts:
+    get:
+      operationId: get_all_accounts
+      description: Get all accounts
+      summary: Get all accounts
+      tags: [ 'Accounts' ]
+      responses:
+        '200':
+          description: The list of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBase'
+    post:
+      operationId: create_accounts
+      description: Create new accounts
+      summary: Create new accounts
+      tags: [ 'Accounts' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccountCreate'
+      responses:
+        '201':
+          description: The list of created accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBase'
+
+    put:
+      operationId: update_accounts
+      description: Updates accounts
+      summary: Updates accounts
+      tags: [ 'Accounts' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          description: The list of updated accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBase'
+        '404':
+          description: 'Account(s) not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Account(s) not found"
+                  affected:
+                    type: array
+                    items:
+                      type: string
+                      format: uuid
+
+    delete:
+      operationId: delete_accounts
+      description: Deletes accounts
+      summary: Deletes accounts
+      tags: [ 'Accounts' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Id'
+      responses:
+        '200':
+          description: The list of deleted accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBase'
+        '404':
+          description: 'Account(s) not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Account(s) not found"
+                  affected:
+                    type: array
+                    items:
+                      type: string
+                      format: uuid
+
+components:
+  schemas:
+    Account:
+      allOf:
+        - $ref: '#/components/schemas/AccountBase'
+        - $ref: '#/components/schemas/Password'
+
+    AccountBase:
+      allOf:
+        - $ref: '#/components/schemas/Id'
+        - $ref: '#/components/schemas/Username'
+        - $ref: '#/components/schemas/Email'
+
+    AccountCreate:
+      allOf:
+        - $ref: '#/components/schemas/Username'
+        - $ref: '#/components/schemas/Email'
+        - $ref: '#/components/schemas/Password'
+
+    Id:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426655440000"
+
+    Username:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "john_doe"
+
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "john@anonymous.user"
+
+    Password:
+      type: object
+      properties:
+        password:
+          type: string
+          example: "super duper hyper mega secret password you'll never guess"
