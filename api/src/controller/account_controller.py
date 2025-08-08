@@ -14,3 +14,4 @@ def index():
         return get_all_accounts()
     elif request.method == 'POST':
         return {"message": "POST method is not implemented yet"}, 501
+    return None
