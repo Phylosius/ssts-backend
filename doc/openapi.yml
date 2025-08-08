@@ -36,25 +36,69 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Account'
+    post:
+      operationId: create_accounts
+      description: Create new accounts
+      summary: Create new accounts
+      tags: [ 'Accounts' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateAccount'
+      responses:
+        '201':
+          description: The list of created accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
 
 components:
   schemas:
     Account:
+      allOf:
+        - $ref: '#/components/schemas/Id'
+        - $ref: '#/components/schemas/Username'
+        - $ref: '#/components/schemas/Email'
+
+    CreateAccount:
+      allOf:
+        - $ref: '#/components/schemas/Username'
+        - $ref: '#/components/schemas/Email'
+        - $ref: '#/components/schemas/Password'
+
+    Id:
       type: object
       properties:
         id:
           type: string
           format: uuid
-          example: "123e4567-e89b-12d3-a456-426655440000123e4567-e89b-12d3-a456-426655440000"
+          example: "123e4567-e89b-12d3-a456-426655440000"
+
+    Username:
+      type: object
+      properties:
         username:
           type: string
           example: "john_doe"
+
+    Email:
+      type: object
+      properties:
         email:
           type: string
           format: email
-          example: "john.doe@anonymous.user"
+          example: "john@anonymous.user"
 
     Password:
-      type: string
-      format: password
-      example: "super duper hyper mega secret password you'll never guess"
+      type: object
+      properties:
+        password:
+          type: string
+          example: "super duper hyper mega secret password you'll never guess"
