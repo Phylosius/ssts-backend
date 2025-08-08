@@ -35,7 +35,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Account'
+                  $ref: '#/components/schemas/AccountBase'
     post:
       operationId: create_accounts
       description: Create new accounts
@@ -48,7 +48,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/CreateAccount'
+                $ref: '#/components/schemas/AccountCreate'
       responses:
         '201':
           description: The list of created accounts
@@ -57,17 +57,22 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Account'
+                  $ref: '#/components/schemas/AccountBase'
 
 components:
   schemas:
     Account:
       allOf:
+        - $ref: '#/components/schemas/AccountBase'
+        - $ref: '#/components/schemas/Password'
+
+    AccountBase:
+      allOf:
         - $ref: '#/components/schemas/Id'
         - $ref: '#/components/schemas/Username'
         - $ref: '#/components/schemas/Email'
 
-    CreateAccount:
+    AccountCreate:
       allOf:
         - $ref: '#/components/schemas/Username'
         - $ref: '#/components/schemas/Email'
