@@ -59,6 +59,82 @@ paths:
                 items:
                   $ref: '#/components/schemas/AccountBase'
 
+    put:
+      operationId: update_accounts
+      description: Updates accounts
+      summary: Updates accounts
+      tags: [ 'Accounts' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          description: The list of updated accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBase'
+        '404':
+          description: 'Account(s) not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Account(s) not found"
+                  affected:
+                    type: array
+                    items:
+                      type: string
+                      format: uuid
+
+    delete:
+      operationId: delete_accounts
+      description: Deletes accounts
+      summary: Deletes accounts
+      tags: [ 'Accounts' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Id'
+      responses:
+        '200':
+          description: The list of deleted accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBase'
+        '404':
+          description: 'Account(s) not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Account(s) not found"
+                  affected:
+                    type: array
+                    items:
+                      type: string
+                      format: uuid
+
 components:
   schemas:
     Account:
