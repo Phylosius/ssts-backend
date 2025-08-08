@@ -11,7 +11,7 @@ paths:
       operationId: index
       description: API Greeting Point
       summary: Get a greeting message
-      tags: [ 'Greeting', 'Index' ]
+      tags: ['Index' ]
       responses:
         '200':
           description: The greeting message
@@ -20,3 +20,41 @@ paths:
               schema:
                 type: string
                 example: "The server is running ╰(*°▽°*)╯"
+
+  /accounts:
+    get:
+      operationId: get_all_accounts
+      description: Get all accounts
+      summary: Get all accounts
+      tags: [ 'Accounts' ]
+      responses:
+        '200':
+          description: The list of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426655440000123e4567-e89b-12d3-a456-426655440000"
+        username:
+          type: string
+          example: "john_doe"
+        email:
+          type: string
+          format: email
+          example: "john.doe@anonymous.user"
+
+    Password:
+      type: string
+      format: password
+      example: "super duper hyper mega secret password you'll never guess"
