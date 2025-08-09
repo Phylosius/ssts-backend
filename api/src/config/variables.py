@@ -18,4 +18,6 @@ class Variables:
     DB_USER = config['DB_USER']
     DB_PASSWORD = config['DB_PASSWORD']
 
+    TEMP_IMAGE_PATH = project_root_path / "temp" / "image"
+
 VARIABLES = Variables()

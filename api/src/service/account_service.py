@@ -7,7 +7,7 @@ from ..dto.account_dto import AccountDTO, AccountCreateDTO
 def get_all():
     return list(map(lambda a: AccountDTO.from_model(a).to_dict(), get_all_accounts()))
 
-def save_all(accounts: list[AccountCreateDTO]):
+def save_all(accounts: [AccountCreateDTO]):
     saved_accounts = []
     print(accounts)
     for account in accounts:
