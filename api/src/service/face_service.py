@@ -1,7 +1,9 @@
 import face_recognition
+from numpy import array
 
 from ..dto.face_info_dto import FaceInfoDto
 from ..dto.ltbr_rectangle import LTBRRectangle
+from ..dto.face_encodings_dto import EncodingsMatchInfoDTO
 
 def get_faces_info(image_path: str):
     faces_info = []
@@ -22,3 +24,24 @@ def get_faces_info(image_path: str):
             )
 
     return faces_info
+
+def compare_faces(known_faces: list, face_to_check, tolerance: float = 0.7):
+    known_faces = array([array(face) for face in known_faces])
+    face_to_check = array(face_to_check)
+    face_distances = face_recognition.face_distance(known_faces, face_to_check)
+    face_matches = face_recognition.compare_faces(known_faces, face_to_check, tolerance=tolerance)
+
+    matches = []
+    for i, face in enumerate(known_faces):
+        matches.append(
+            EncodingsMatchInfoDTO(
+                list(face),
+                bool(face_matches[i]),
+                face_distances[i]
+            ).to_dict()
+        )
+
+    return {
+        "toCheckEncoding": list(face_to_check),
+        "matches": matches
+    }
