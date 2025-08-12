@@ -3,7 +3,7 @@ import uuid
 from flask import Blueprint, request
 
 from ..config import VARIABLES
-from ..service.face_service import get_faces_info
+from ..service.face_service import get_faces_info, compare_faces as compare_faces_encodings
 
 face_bp = Blueprint('face', __name__, url_prefix='/face')
 
@@ -22,3 +22,13 @@ def describe_face():
     image.save(image_path)
 
     return get_faces_info(image_path)
+
+@face_bp.route('/compare', methods=['POST'])
+def compare_faces():
+    data = request.json
+    known_encodings = data.get("knownEncodings")
+    to_check_encoding = data.get("toCheckEncoding")
+    tolerance = data.get("tolerance")
+    tolerance = float(tolerance) if tolerance is not None else 0.7
+
+    return compare_faces_encodings(known_encodings, to_check_encoding, tolerance)
