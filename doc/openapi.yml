@@ -36,6 +36,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AccountBase'
+
     post:
       operationId: create_accounts
       description: Create new accounts
