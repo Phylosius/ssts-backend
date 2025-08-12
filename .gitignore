@@ -8,3 +8,6 @@ uv.lock
 
 # python
 **/__pycache__/
+
+# temp folder
+**/temp/
