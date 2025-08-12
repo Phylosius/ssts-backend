@@ -162,8 +162,65 @@ paths:
                 items:
                   $ref: '#/components/schemas/FaceInfo'
 
+  /face/compare:
+    post:
+      operationId: compare_faces
+      description: Compares multiple faces by to a face by their encodings
+      summary: Compare faces by their encodings
+      tags: [ 'Face' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FaceComparisonRequest'
+      responses:
+        '200':
+          description: the comparison result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FaceComparisonResult'
+
 components:
   schemas:
+    FaceComparisonResult:
+      type: object
+      properties:
+        toCheckEncoding:
+          $ref: '#/components/schemas/128dArray'
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/EncodingsMatchInfo'
+
+    EncodingsMatchInfo:
+      type: object
+      properties:
+        encodings:
+          $ref: '#/components/schemas/128dArray'
+        isMatches:
+          type: boolean
+          example: true
+        distance:
+          type: number
+          format: float
+
+    FaceComparisonRequest:
+      type: object
+      properties:
+        knownEncodings:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/128dArray'
+        toCheckEncoding:
+          $ref: '#/components/schemas/128dArray'
+        tolerance:
+          type: number
+          format: float
+          default: 0.7
+
     FaceInfo:
       allOf:
         - $ref: '#/components/schemas/FaceRecognitionEncodings'
@@ -195,12 +252,15 @@ components:
       type: object
       properties:
         encodings:
-            type: array
-            items:
-              type: number
-              format: float
-              minItems: 128
-              maxItems: 128
+            $ref: '#/components/schemas/128dArray'
+
+    128dArray:
+      type: array
+      items:
+        type: number
+        format: float
+        minItems: 128
+        maxItems: 128
 
     Account:
       allOf:
