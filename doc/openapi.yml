@@ -288,6 +288,11 @@ components:
       allOf:
         - $ref: '#/components/schemas/AccountBase'
         - $ref: '#/components/schemas/Password'
+      properties:
+        facesInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/FaceInfo'
 
     AccountBase:
       allOf:
