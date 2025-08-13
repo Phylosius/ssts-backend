@@ -44,7 +44,7 @@ class AccountCreateDTO:
             password=data.get('password')
         )
 
-class AccountUpdateDTO(AccountCreateDTO):
+class AccountDetailledDTO(AccountCreateDTO):
     def __init__(self, id: str, username: str, email: str, password: str):
         super().__init__(username, email, password)
         self.id = id
