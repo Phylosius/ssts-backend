@@ -56,6 +56,10 @@ class AccountUpdateDTO(AccountCreateDTO):
     def from_dict(cls, data: dict):
         return AccountUpdateDTO(data.get('id'), data.get('username'), data.get('email'), data.get('password'))
 
+    @classmethod
+    def from_model(cls, model: Account):
+        return cls(model.id, model.username, model.email, model.password)
+
     def to_dict(self):
         return {
             "id": self.id,

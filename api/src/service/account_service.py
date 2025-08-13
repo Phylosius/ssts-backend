@@ -9,6 +9,9 @@ from ..dto.account_dto import AccountDTO, AccountCreateDTO, AccountUpdateDTO
 from ..mapper.account_mapper import accounts_to_dicts
 
 
+def get_by_id(account_id: str):
+    return AccountUpdateDTO.from_model(get_account_by_id(account_id)).to_dict()
+
 def get_all():
     return list(map(lambda a: AccountDTO.from_model(a).to_dict(), get_all_accounts()))
 
