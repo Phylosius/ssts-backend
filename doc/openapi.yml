@@ -136,6 +136,28 @@ paths:
                       type: string
                       format: uuid
 
+  /accounts/{id}:
+    get:
+      operationId: get_account
+      description: Get an account by it's id
+      summary: Get account by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Retrieved account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: 'Account not found'
+
   /face/describe:
     post:
       operationId: recognize_face
