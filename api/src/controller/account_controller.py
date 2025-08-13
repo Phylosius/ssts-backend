@@ -7,7 +7,7 @@ from ..service.account_service import (
 
 account_bp = Blueprint('account', __name__, url_prefix='/accounts')
 
-@account_bp.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@account_bp.route('', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def index():
     if request.method == 'GET':
         return get_all_accounts()
