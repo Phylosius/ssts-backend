@@ -1,4 +1,15 @@
-from ..repository.face_id_repo import get_all_by_account_id as get_face_ids_by_account_id
+from .face_id import FaceId
+from ..repository.pg import transactional
+
+@transactional
+def get_face_ids_by_account_id(cur, account_id: str):
+    cur.execute(
+        "SELECT id, added_at, updated_at, face_encodings FROM face_id WHERE account_id = %s;",
+        (account_id,),
+    )
+
+    data = cur.fetchall()
+    return [FaceId(*list(row)) for row in data]
 
 class Account:
 

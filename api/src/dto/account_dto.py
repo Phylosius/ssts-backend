@@ -54,7 +54,7 @@ class AccountDetailledDTO(AccountCreateDTO):
 
     @classmethod
     def from_dict(cls, data: dict):
-        return AccountUpdateDTO(data.get('id'), data.get('username'), data.get('email'), data.get('password'))
+        return AccountDetailledDTO(data.get('id'), data.get('username'), data.get('email'), data.get('password'))
 
     @classmethod
     def from_model(cls, model: Account):
