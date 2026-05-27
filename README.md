@@ -1,1 +1,1 @@
-A face recognition attendance identity checker.
+A simple face recognition REST API.
