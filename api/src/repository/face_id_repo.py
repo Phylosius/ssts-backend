@@ -36,6 +36,16 @@ def get_by_id(cur, face_id_id: str):
     return FaceId(*list(data))
 
 @transactional
+def get_all_by_account_id(cur, account_id: str):
+    cur.execute(
+        "SELECT id, added_at, updated_at, face_encodings FROM face_id WHERE account_id = %s;",
+        (account_id,),
+    )
+
+    data = cur.fetchall()
+    return [FaceId(*list(row)) for row in data]
+
+@transactional
 def update(cur, face_id_id: str, face_id: FaceId):
     cur.execute(
         "UPDATE face_id SET added_at = %s, updated_at = %s, face_encodings = %s WHERE id = %s"

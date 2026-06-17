@@ -1,3 +1,15 @@
+from .face_id import FaceId
+from ..repository.pg import transactional
+
+@transactional
+def get_face_ids_by_account_id(cur, account_id: str):
+    cur.execute(
+        "SELECT id, added_at, updated_at, face_encodings FROM face_id WHERE account_id = %s;",
+        (account_id,),
+    )
+
+    data = cur.fetchall()
+    return [FaceId(*list(row)) for row in data]
 
 class Account:
 
@@ -7,5 +19,8 @@ class Account:
         self.email = email
         self.password = password
 
+    def get_face_ids(self):
+        return get_face_ids_by_account_id(self.id)
+
     def __str__(self):
-        return f'Account(id={self.id}, username={self.username}, email={self.email}, password={self.password}, face_id={self.face_id})'
+        return f'Account(id={self.id}, username={self.username}, email={self.email}, password={self.password})'

@@ -44,7 +44,7 @@ class AccountCreateDTO:
             password=data.get('password')
         )
 
-class AccountUpdateDTO(AccountCreateDTO):
+class AccountDetailledDTO(AccountCreateDTO):
     def __init__(self, id: str, username: str, email: str, password: str):
         super().__init__(username, email, password)
         self.id = id
@@ -54,7 +54,11 @@ class AccountUpdateDTO(AccountCreateDTO):
 
     @classmethod
     def from_dict(cls, data: dict):
-        return AccountUpdateDTO(data.get('id'), data.get('username'), data.get('email'), data.get('password'))
+        return AccountDetailledDTO(data.get('id'), data.get('username'), data.get('email'), data.get('password'))
+
+    @classmethod
+    def from_model(cls, model: Account):
+        return cls(model.id, model.username, model.email, model.password)
 
     def to_dict(self):
         return {

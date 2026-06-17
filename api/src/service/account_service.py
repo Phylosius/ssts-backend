@@ -5,9 +5,12 @@ from ..repository.account_repo import (
     update as update_account,
     delete as delete_account,
     )
-from ..dto.account_dto import AccountDTO, AccountCreateDTO, AccountUpdateDTO
+from ..dto.account_dto import AccountDTO, AccountCreateDTO, AccountDetailledDTO
 from ..mapper.account_mapper import accounts_to_dicts
 
+
+def get_by_id(account_id: str):
+    return AccountDetailledDTO.from_model(get_account_by_id(account_id)).to_dict()
 
 def get_all():
     return list(map(lambda a: AccountDTO.from_model(a).to_dict(), get_all_accounts()))
@@ -25,7 +28,7 @@ def save_all(accounts: [AccountCreateDTO]):
 def update_accounts(accounts):
     updated_accounts = []
     for account in accounts:
-        to_update = AccountUpdateDTO.from_dict(account).to_model()
+        to_update = AccountDetailledDTO.from_dict(account).to_model()
         update_account(to_update.id, to_update)
         updated_accounts.append(to_update)
     return accounts_to_dicts(updated_accounts)
